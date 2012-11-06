@@ -276,3 +276,6 @@
            (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
            {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
 
+(run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 13]))
+           (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
+           {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
