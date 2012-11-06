@@ -4,33 +4,34 @@
   (:use clojure.repl)
   (:use clojure.pprint))
 
-
 (comment
-     For every datum of the form
-     (entity relation value)
-     And every query made of clauses of the form
-     (subject predicate object)
-     we can check if a query is related to an datum
-     if one clause's predicate matches the datums relation the query is related too.
-     For a new datum the query is executed with the clause subject and object replaced by the datums entity and value
+  For every datum of the form
+  (entity relation value)
+  And every query made of clauses of the form
+  (subject predicate object)
+  We can check if a query is related to an datum,
+  if one clause's predicate matches the datums relation the query is related to the datum.
+  Except if the clauses subject and object are parameterized, but we handle that too, by checking if the values of parameterized variables,
+  match with the datum.
+  For a new datum the query is executed with the clause subject and object replaced by the datums entity and value
 
-     Query
+  Query
 
-     [?p :person/friend ?f]
-     [?f :person/message ?m]
+  [?p :person/friend ?f]
+  [?f :person/message ?m]
 
-     Datum
+  Datum
 
-     [:user1 :person/friend :user2]
+  [:user1 :person/friend :user2]
 
-     Reactive Query
+  Reactive Query
 
-     [:user1 :person/friend :user2]
-     [:user2 :person/message ?m]
+  [:user1 :person/friend :user2]
+  [:user2 :person/message ?m]
 
-     To try it out just run the function push in the repl and hopefully see users->queries get updated accordingly.
+  To try it out just run the function push in the repl and hopefully see users->queries get updated accordingly.
 
-     Obviously this will only work for a subset of datomics queries.)
+  Obviously this will only work for a subset of datomics queries.)
 
 (def uri "datomic:mem://rrp19")
 
