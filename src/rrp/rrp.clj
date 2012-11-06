@@ -221,14 +221,14 @@
 (defn queries-related-to-datums [dbval datums]
   (q '[:find ?q ?s ?o ?e ?aname ?v ;;?added
        :in $ [[?e ?a ?v _ ?added]]
-                :where
-                [?e ?a ?v _ ?added]
-                [?a :db/ident ?aname]
-                [?q :query/clause ?c]
-                [?c :clause/predicate ?aname]
-                [?c :clause/subject ?s]
-                [?c :clause/object ?o]
-                ] dbval datums))
+       :where
+       [?e ?a ?v _ ?added]
+       [?a :db/ident ?aname]
+       [?q :query/clause ?c]
+       [?c :clause/predicate ?aname]
+       [?c :clause/subject ?s]
+       [?c :clause/object ?o]
+       ] dbval datums))
 
 (defn overwrite-args [q bindings]
   (assoc q 1 (map symbol (keys bindings))))
