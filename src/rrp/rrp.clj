@@ -59,14 +59,14 @@
                  :db/ident :query/out
                  :db/valueType :db.type/string
                  :db/cardinality :db.cardinality/many
-                 :db/doc "A querys clause"
+                 :db/doc "A querys output"
                  :db.install/_attribute :db.part/db}
                 ;;A Clause is of the typical subject prediate object form
                 {:db/id #db/id[:db.part/db]
                  :db/ident :clause/subject
                  :db/valueType :db.type/string
                  :db/cardinality :db.cardinality/one
-                 :db/doc "A guild's realm"
+                 :db/doc "A clause subject"
                  :db.install/_attribute :db.part/db}
                 {:db/id #db/id[:db.part/db]
                  :db/ident :clause/object
@@ -78,7 +78,7 @@
                  :db/ident :clause/predicate
                  :db/valueType :db.type/keyword
                  :db/cardinality :db.cardinality/one
-                 :db/doc "A clauses predicate"
+                 :db/doc "A clause predicate"
                  :db.install/_attribute :db.part/db}
                 ;;Just some simple example relationship
                 ]]
