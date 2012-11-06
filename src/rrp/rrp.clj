@@ -137,11 +137,10 @@
   ([output input clauses]
      (save-query output input clauses (d/tempid :db.part/user))))
 
-
 (defn load-message-query []
   "Store a query for finding all messages of a user in the database."
-  (save-query ["?u"] ["?m"] [["?u" :person/friend "?p"]
-                             ["?m" :message/person "?p"]] #db/id[:db.part/user 2]))
+  (save-query ["?u"] ["?m"]
+              ["?m" :message/person "?p"] #db/id[:db.part/user 2]))
 
 (defn load-friends-query []
   "Store a query, which finds all friends of a user in the database."
