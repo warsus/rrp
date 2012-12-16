@@ -268,14 +268,14 @@
 ;;TODO: potential bug: if propagate runs after push and runquery
 ;;things get pushed to the user twice
 ;;Solution call propagate from push?
-(comment (load-db)
+(load-db)
 
-         (.start propagator)
+(.start propagator)
 
-         (run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 7]))
-                    (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
-                    {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
+(run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 7]))
+           (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
+           {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
 
-         (run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 13]))
-                    (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
-                    {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))}))
+(run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 13]))
+           (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
+           {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
