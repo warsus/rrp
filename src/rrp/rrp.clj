@@ -78,7 +78,7 @@
                  :db/ident :clause/predicate
                  :db/valueType :db.type/keyword
                  :db/cardinality :db.cardinality/one
-                 :db/doc "A clause predicate"
+                 :db/doc "A clause 2predicate"
                  :db.install/_attribute :db.part/db}
                 ;;Just some simple example relationship
                 ]]
@@ -128,19 +128,19 @@
   ([output input clauses id]
      "Store a query, which finds all friends of a user in the database."
      (let [clauses (map clause clauses)
-           guild-seed (conj (map second clauses)
+           query-seed (conj (map second clauses)
                             {:db/id id
                              :query/in input
                              :query/out output
                              :query/clause (map first clauses)})]
-       @(d/transact conn guild-seed)))
+       @(d/transact conn query-seed)))
   ([output input clauses]
      (save-query output input clauses (d/tempid :db.part/user))))
 
 (defn load-message-query []
   "Store a query for finding all messages of a user in the database."
   (save-query ["?u"] ["?m"]
-              ["?m" :message/person "?p"] #db/id[:db.part/user 2]))
+              [["?m" :message/person "?p"]] #db/id[:db.part/user 2]))
 
 (defn load-friends-query []
   "Store a query, which finds all friends of a user in the database."
@@ -268,14 +268,14 @@
 ;;TODO: potential bug: if propagate runs after push and runquery
 ;;things get pushed to the user twice
 ;;Solution call propagate from push?
-(load-db)
+(comment (load-db)
 
-(.start propagator)
+         (.start propagator)
 
-(run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 7]))
-           (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
-           {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
+         (run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 7]))
+                    (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
+                    {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
 
-(run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 13]))
-           (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
-           {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))})
+         (run-query (db conn) (:db/id (d/entity (db conn) #db/id[:db.part/user 13]))
+                    (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))
+                    {"?u" (:db/id (d/entity (db conn) #db/id[:db.part/user 3]))}))
