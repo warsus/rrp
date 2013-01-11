@@ -123,7 +123,6 @@
           :clause/object object
           :clause/predicate predicate}]))
 
-
 (defn save-query
   ([output input clauses id]
      "Store a query, which finds all friends of a user in the database."
