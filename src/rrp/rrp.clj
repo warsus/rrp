@@ -234,7 +234,7 @@
   (assoc q 1 (map symbol (keys bindings))))
 
 (defn propagate []
-  "Get's all related queries.
+  "Gets all related queries.
    If subject and object are free variables run the query as mentioned above.
    If they are parameterized check if the arguments match with datum, and if they do
    run the query as mentioned above."
