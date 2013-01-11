@@ -87,8 +87,8 @@
 (defn load-social-schema []
   "Just some generic social schema.
    Each person may have multiple friends.
-   Each person may have multiple messages.
-"
+   Each person may have multiple messages."
+  
   (let [schema [{:db/id #db/id[:db.part/db]
                  :db/ident :person/name
                  :db/valueType :db.type/string
