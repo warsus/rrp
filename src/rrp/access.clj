@@ -102,7 +102,7 @@
                   :where '[[access ?u ?e]]}]
        (not (empty? (q query db access-rule user entity))))))
 
-(defn user-query [query db user & args]
+(defn user-query-slow [query db user & args]
   "Runs a query in the users sandbox"
   (q query (d/filter db #(access? user %1 (.e %2))) args))
 
@@ -114,8 +114,7 @@
   '[[?i :item/max-damage ?max]
     [?i :item/min-damage ?e]]
   
-  '[[?g :guild/item ?i]
-    [access ?g ?i]
+  '[[access ?g ?i]
     [?i :item/max-damage ?max]
     [?i :item/min-damage ?e]]
 
